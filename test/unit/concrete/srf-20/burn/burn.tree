@@ -1,0 +1,5 @@
+Burn_Unit_Concrete_Test
+├── when the holder is the zero address
+│   └── it should revert
+└── when the holder is not the zero address
+    └── it should burn the tokens
