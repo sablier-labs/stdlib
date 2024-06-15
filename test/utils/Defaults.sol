@@ -14,7 +14,7 @@ contract Defaults is Constants {
 
     uint256 public constant BURN_AMOUNT = 2500e18;
     uint256 public constant MINT_AMOUNT = 10_000e18;
-    bytes32 public constant SUB_ID = bytes32(0);
+    uint256 public constant SUB_ID = 0;
 
     ISRF20 private token;
     Users private users;

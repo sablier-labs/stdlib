@@ -9,8 +9,8 @@ import { SRF20 } from "../../standards/srf-20/SRF20.sol";
 contract SRF20Mock is SRF20 {
     constructor(string memory name, string memory symbol) SRF20(name, symbol) { }
 
-    function burn(address holder, uint256 amount) external {
-        _burn(holder, amount);
+    function burn(uint256 amount) external {
+        _burn(msg.sender, amount);
     }
 
     function mint(address recipient, uint256 amount) external {
