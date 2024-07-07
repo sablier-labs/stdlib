@@ -99,22 +99,21 @@ library NativeTokens {
     /// Requirements:
     /// - The calling contract must have at least `amount` tokens.
     ///
-    /// @param to The address of the recipient.
+    /// @param recipientAndCallee The address of the contract recipient of the tokens which will, also, be called.
     /// @param tokenID The sub-identifier of the native token to transfer.
     /// @param amount The quantity of native tokens to transfer.
-    /// @param callee The address of the contract to call after the transfer.
     /// @param data The call data to pass to the `callee`.
     function transferAndCall(
-        address to,
+        address recipientAndCallee,
         uint256 tokenID,
         uint256 amount,
-        address callee,
         bytes calldata data
     )
         internal
     {
         // ABI encode the input parameters.
-        bytes memory callData = abi.encodeCall(INativeTokens.transferAndCall, (to, tokenID, amount, callee, data));
+        bytes memory callData =
+            abi.encodeCall(INativeTokens.transferAndCall, (recipientAndCallee, tokenID, amount, data));
 
         // Call the precompile, ignoring the response because the VM will panic if there's an issue.
         (bool response,) = PRECOMPILE_NATIVE_TOKENS.delegatecall(callData);
@@ -131,13 +130,7 @@ library NativeTokens {
     /// @param to The address of the recipient.
     /// @param tokenIDs The IDs of the native tokens to transfer.
     /// @param amounts The quantities of native tokens to transfer.
-    function transferMultiple(
-        address to,
-        uint256[] calldata tokenIDs,
-        uint256[] calldata amounts
-    )
-        internal
-    {
+    function transferMultiple(address to, uint256[] calldata tokenIDs, uint256[] calldata amounts) internal {
         // ABI encode the input parameters.
         bytes memory callData = abi.encodeCall(INativeTokens.transferMultiple, (to, tokenIDs, amounts));
 
@@ -154,23 +147,21 @@ library NativeTokens {
     /// Requirements:
     /// - The calling contract must have at least `amounts[i]` tokens for each token ID `tokenIDs[i]`.
     ///
-    /// @param to The address of the recipient.
+    /// @param recipientAndCallee The address of the contract recipient of the tokens which will, also, be called.
     /// @param tokenIDs The IDs of the native tokens to transfer.
     /// @param amounts The quantities of native tokens to transfer.
-    /// @param callee The address of the contract to call after the transfer.
     /// @param data The call data to pass to the `callee`.
     function transferMultipleAndCall(
-        address to,
+        address recipientAndCallee,
         uint256[] calldata tokenIDs,
         uint256[] calldata amounts,
-        address callee,
         bytes calldata data
     )
         internal
     {
         // ABI encode the input parameters.
         bytes memory callData =
-            abi.encodeCall(INativeTokens.transferMultipleAndCall, (to, tokenIDs, amounts, callee, data));
+            abi.encodeCall(INativeTokens.transferMultipleAndCall, (recipientAndCallee, tokenIDs, amounts, data));
 
         // Call the precompile, ignoring the response because the VM will panic if there's an issue.
         (bool response,) = PRECOMPILE_NATIVE_TOKENS.delegatecall(callData);

@@ -11,6 +11,17 @@ contract NaiveTokenTransferrerMock {
         to.transfer(tokenID, amount);
     }
 
+    function transferAndCall(
+        address recipientAndCallee,
+        uint256 tokenID,
+        uint256 amount,
+        bytes calldata data
+    )
+        external
+    {
+        recipientAndCallee.transferAndCall(tokenID, amount, data);
+    }
+
     function transferMultiple(address to, uint256[] calldata tokenIDs, uint256[] calldata amounts) external {
         to.transferMultiple(tokenIDs, amounts);
     }

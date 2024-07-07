@@ -10,24 +10,17 @@ interface INativeTokens {
     function mint(uint256 subID, address recipient, uint256 amount) external;
     function transfer(address to, uint256 tokenID, uint256 amount) external;
     function transferAndCall(
-        address to,
+        address recipientAndCallee,
         uint256 tokenID,
         uint256 amount,
-        address callee,
         bytes calldata data
     )
         external;
-    function transferMultiple(
-        address to,
-        uint256[] calldata tokenIDs,
-        uint256[] calldata amounts
-    )
-        external;
+    function transferMultiple(address to, uint256[] calldata tokenIDs, uint256[] calldata amounts) external;
     function transferMultipleAndCall(
-        address to,
+        address recipientAndCallee,
         uint256[] calldata tokenIDs,
         uint256[] calldata amounts,
-        address callee,
         bytes calldata data
     )
         external;
