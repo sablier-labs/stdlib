@@ -7,6 +7,9 @@ pragma solidity >=0.8.12;
 interface INativeTokens {
     function balanceOf(uint256 tokenID, address account) external returns (uint256);
     function burn(uint256 subID, address holder, uint256 amount) external;
+
+    // TODO: implement `callvalues()`
+
     function mint(uint256 subID, address recipient, uint256 amount) external;
     function transfer(address to, uint256 tokenID, uint256 amount) external;
     function transferAndCall(

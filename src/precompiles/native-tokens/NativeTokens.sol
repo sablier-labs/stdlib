@@ -2,7 +2,7 @@
 pragma solidity >=0.8.12;
 
 import { PRECOMPILE_NATIVE_TOKENS } from "../../Constants.sol";
-import { StdLib_UnauthorizedCaller, StdLib_UnknownError } from "../../Errors.sol";
+import { StdLib_UnknownError } from "../../Errors.sol";
 import { INativeTokens } from "./INativeTokens.sol";
 
 library NativeTokens {
