@@ -7,6 +7,10 @@ import { NativeTokens } from "../../precompiles/native-tokens/NativeTokens.sol";
 contract NaiveTokenTransferrerMock {
     using NativeTokens for address;
 
+    function getBalanceOfToken(address account, uint256 tokenID) external view returns (uint256) {
+        return account.balanceOf(tokenID);
+    }
+
     function transfer(address to, uint256 tokenID, uint256 amount) external {
         to.transfer(tokenID, amount);
     }
@@ -24,5 +28,16 @@ contract NaiveTokenTransferrerMock {
 
     function transferMultiple(address to, uint256[] calldata tokenIDs, uint256[] calldata amounts) external {
         to.transferMultiple(tokenIDs, amounts);
+    }
+
+    function transferMultipleAndCall(
+        address recipientAndCallee,
+        uint256[] calldata tokenIDs,
+        uint256[] calldata amounts,
+        bytes calldata data
+    )
+        external
+    {
+        recipientAndCallee.transferMultipleAndCall(tokenIDs, amounts, data);
     }
 }

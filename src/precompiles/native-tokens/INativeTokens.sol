@@ -5,7 +5,7 @@ pragma solidity >=0.8.12;
 /// @dev It is NOT recommended to use this interface directly. Instead, users should use the {NativeTokens} library.
 /// This interface is used by the library to ABI encode the precompile calls.
 interface INativeTokens {
-    function balanceOf(uint256 tokenID, address account) external returns (uint256);
+    function balanceOf(address account, uint256 tokenID) external returns (uint256);
     function burn(uint256 subID, address holder, uint256 amount) external;
 
     // TODO: implement `callvalues()`
