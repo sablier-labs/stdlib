@@ -16,7 +16,15 @@ contract ContractToTransferAndCallTo {
         recipient.transfer(tokenID, amount - fee);
     }
 
-    function transferMultipleTokensForAFee(address recipient, uint256[] calldata tokenIDs, uint256[] calldata amounts, uint256 fee) external payable {
+    function transferMultipleTokensForAFee(
+        address recipient,
+        uint256[] calldata tokenIDs,
+        uint256[] calldata amounts,
+        uint256 fee
+    )
+        external
+        payable
+    {
         require(tokenIDs.length == amounts.length, "Token IDs and amounts must have the same length");
 
         for (uint256 i = 0; i < tokenIDs.length; i++) {

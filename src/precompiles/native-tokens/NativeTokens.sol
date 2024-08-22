@@ -14,7 +14,7 @@ library NativeTokens {
     /// @param tokenID The ID of the native token to query the balance of.
     /// @param account The address to query the balance of.
     /// @return The balance of the `account` for the native token `tokenID`, denoted in 18 decimals.
-    function balanceOf(address account, uint256 tokenID) public view returns (uint256) {
+    function balanceOf(address account, uint256 tokenID) internal view returns (uint256) {
         // ABI encode the input parameters.
         bytes memory callData = abi.encodeCall(INativeTokens.balanceOf, (account, tokenID));
 
