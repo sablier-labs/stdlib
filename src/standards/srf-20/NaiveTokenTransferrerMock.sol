@@ -11,6 +11,12 @@ contract NaiveTokenTransferrerMock {
         return account.balanceOf(tokenID);
     }
 
+    function getCallValues() external payable returns (uint256[] memory, uint256[] memory) {
+        // TODO: make the getCallValues() function callable directly from the Precompile, w/o having to call it on an
+        // address?
+        return address(this).getCallValues();
+    }
+
     function transfer(address to, uint256 tokenID, uint256 amount) external {
         to.transfer(tokenID, amount);
     }
