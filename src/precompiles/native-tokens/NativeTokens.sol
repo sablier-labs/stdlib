@@ -11,8 +11,8 @@ library NativeTokens {
     //////////////////////////////////////////////////////////////////////////*/
 
     /// @notice Returns the balance of the `account` for the native token `tokenID`.
-    /// @param tokenID The ID of the native token to query the balance of.
     /// @param account The address to query the balance of.
+    /// @param tokenID The ID of the native token to query the balance of.
     /// @return The balance of the `account` for the native token `tokenID`, denoted in 18 decimals.
     function balanceOf(address account, uint256 tokenID) internal view returns (uint256) {
         // ABI encode the input parameters.
@@ -30,8 +30,8 @@ library NativeTokens {
         return abi.decode(returnData, (uint256));
     }
 
-    /// @notice Returns the token ids and amounts of the Native Tokens transferred in the context
-    /// of the current contract call.
+    /// @notice Returns the token ids and amounts of the Native Tokens transferred in the context of the current
+    /// contract call.
     ///
     /// Requirements:
     /// - The caller of this function must be a contract.
@@ -59,7 +59,7 @@ library NativeTokens {
                          USER-FACING NON-CONSTANT FUNCTIONS
     //////////////////////////////////////////////////////////////////////////*/
 
-    /// @notice Burns `amount` tokens with the sub-identifier `sub_id` from the `holder`'s account.
+    /// @notice Burns `amount` tokens with the sub-identifier `subID` from the `holder`'s account.
     /// @dev Generates a Burn receipt.
     ///
     /// Requirements:
@@ -164,8 +164,7 @@ library NativeTokens {
         response;
     }
 
-    /// @notice Performs multiple native token transfers from the calling contract to the recipient `to`, and calls
-    /// the
+    /// @notice Performs multiple native token transfers from the calling contract to the recipient `to`, and calls the
     /// `callee` with the calldata `data`.
     /// @dev Generates multiple Transfer receipts.
     ///
