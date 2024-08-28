@@ -30,31 +30,6 @@ library NativeTokens {
         return abi.decode(returnData, (uint256));
     }
 
-    /// @notice Returns the token ids and amounts of the Native Tokens transferred in the context of the current
-    /// contract call.
-    ///
-    /// Requirements:
-    /// - The caller of this function must be a contract.
-    ///
-    /// @return tokenIDs The IDs of the transferred Native Tokens.
-    /// @return amounts The amounts of the transferred Native Tokens.
-    function getCallValues(address notUsed) internal returns (uint256[] memory, uint256[] memory) {
-        notUsed;
-        // ABI encode the input parameters.
-        bytes memory callData = abi.encodeCall(INativeTokens.getCallValues, ());
-
-        // Call the precompile.
-        (bool success, bytes memory returnData) = PRECOMPILE_NATIVE_TOKENS.delegatecall(callData);
-
-        // This is an unexpected error since the VM should have panicked if the call failed.
-        if (!success) {
-            revert StdLib_UnknownError("NativeTokens: getCallValues failed");
-        }
-
-        // Decode the return data.
-        return abi.decode(returnData, (uint256[], uint256[]));
-    }
-
     /*//////////////////////////////////////////////////////////////////////////
                          USER-FACING NON-CONSTANT FUNCTIONS
     //////////////////////////////////////////////////////////////////////////*/
@@ -76,6 +51,30 @@ library NativeTokens {
         // Call the precompile, ignoring the response since the VM will panic if there's an issue.
         (bool response,) = PRECOMPILE_NATIVE_TOKENS.delegatecall(callData);
         response;
+    }
+
+    /// @notice Returns the token ids and amounts of the Native Tokens transferred in the context of the current
+    /// contract call.
+    ///
+    /// Requirements:
+    /// - The caller of this function must be a contract.
+    ///
+    /// @return tokenIDs The IDs of the transferred Native Tokens.
+    /// @return amounts The amounts of the transferred Native Tokens.
+    function getCallValues(address /*notUsed*/ ) internal returns (uint256[] memory, uint256[] memory) {
+        // ABI encode the input parameters.
+        bytes memory callData = abi.encodeCall(INativeTokens.getCallValues, ());
+
+        // Call the precompile.
+        (bool success, bytes memory returnData) = PRECOMPILE_NATIVE_TOKENS.delegatecall(callData);
+
+        // This is an unexpected error since the VM should have panicked if the call failed.
+        if (!success) {
+            revert StdLib_UnknownError("NativeTokens: getCallValues failed");
+        }
+
+        // Decode the return data.
+        return abi.decode(returnData, (uint256[], uint256[]));
     }
 
     /// @notice Mints `amount` tokens with sub-identifier `subID` to the provided `recipient`.
