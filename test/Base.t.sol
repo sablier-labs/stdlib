@@ -59,8 +59,8 @@ abstract contract Base_Test is Constants, Test {
         return user;
     }
 
-    /// @dev Derives the asset ID from the contract's address and the default sub ID.
-    function getAssetID(SRF20Mock tokenContract) internal view returns (uint256) {
+    /// @dev Derives the token ID from the contract's address and the default sub ID.
+    function getTokenID(SRF20Mock tokenContract) internal view returns (uint256) {
         // Concatenate the contract's address and the default sub ID.
         bytes memory concatenation = abi.encodePacked(address(tokenContract), defaults.SUB_ID());
 

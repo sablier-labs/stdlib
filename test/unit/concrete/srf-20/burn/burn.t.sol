@@ -8,7 +8,8 @@ contract Burn_Unit_Concrete_Test is Base_Test {
     function test_RevertWhen_TheHolderIsTheZeroAddress() external {
         address holder = address(0);
         vm.expectRevert(abi.encodeWithSelector(ISRF20.SRF20_InvalidHolder.selector, holder));
-        usdc.burn({ holder: holder, amount: 1 });
+        vm.prank(holder);
+        usdc.burn({ amount: 1 });
     }
 
     modifier whenHolderNotZeroAddress() {
