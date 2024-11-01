@@ -3,7 +3,8 @@
 [license]: https://opensource.org/licenses/MIT
 [license-badge]: https://img.shields.io/badge/License-MIT-blue.svg
 
-This repository contains the Sablier Standard Library.
+This repository hosts the Sablier Standard Library, providing precompiles, standards, and testing utilities essential
+for developing applications on the Sablier Mainnet.
 
 ## License
 
